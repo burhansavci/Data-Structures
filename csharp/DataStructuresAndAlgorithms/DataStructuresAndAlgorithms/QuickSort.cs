@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Challenges
+namespace DataStructuresAndAlgorithms
 {
     public class QuickSort
     {

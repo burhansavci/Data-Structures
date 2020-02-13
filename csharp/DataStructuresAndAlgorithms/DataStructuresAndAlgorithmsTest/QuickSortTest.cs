@@ -1,8 +1,7 @@
-using System;
+﻿using DataStructuresAndAlgorithms;
 using Xunit;
-using Challenges;
 
-namespace ChallengesTest
+namespace DataStructuresAndAlgorithmsTest
 {
     public class QuickSortTest
     {
@@ -19,6 +18,5 @@ namespace ChallengesTest
             Assert.Equal(arr2, new int[] { -23, -1, 0, 10, 11, 34, 56, 75, 103, 103 });
             Assert.Equal(arr3, new int[] { -75, -23, -15, -13, -12, -6, -3, -2, 0 });
         }
-
     }
 }

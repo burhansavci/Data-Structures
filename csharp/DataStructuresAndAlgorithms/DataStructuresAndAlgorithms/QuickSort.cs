@@ -53,7 +53,7 @@
         /// </summary>
         /// <param name="arr">The array where the swap will occur.</param>
         /// <param name="firstIndex">The first index to be used in swap process.</param>
-        /// <param name="secondIndex">The seconf index to be used in swap process.</param>
+        /// <param name="secondIndex">The second index to be used in swap process.</param>
         static void Swap(int[] arr, int firstIndex, int secondIndex)
         {
             int temp = arr[firstIndex];

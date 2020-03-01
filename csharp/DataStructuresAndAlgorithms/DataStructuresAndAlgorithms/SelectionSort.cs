@@ -24,7 +24,7 @@ namespace DataStructuresAndAlgorithms
         /// </summary>
         /// <param name="arr">The array in which the loop will take place.</param>
         /// <param name="startIndex">The start index of the sub-array.</param>
-        /// <returns></returns>
+        /// <returns>The index of the minimum number.</returns>
         static int IndexOfMinumum(int[] arr, int startIndex)
         {
             int minValue = arr[startIndex];

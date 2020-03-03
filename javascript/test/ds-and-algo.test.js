@@ -2,6 +2,7 @@ const assert = require('chai').assert;
 const quickSort = require('../quickSort').quickSort;
 const quickSortOptimized = require('../quickSortOptimized').quickSortOptimized;
 const selectionSort = require('../selectionSort').selectionSort;
+const insertionSort = require('../insertionSort').insertionSort;
 
 describe("Data Structures And Algorithms", () => {
     describe("Quick Sort", () => {
@@ -41,6 +42,19 @@ describe("Data Structures And Algorithms", () => {
             assert.deepEqual(arr1, [-23, -10, 1, 2, 3, 4, 5]);
             assert.deepEqual(arr2, [-10, -10, 0, 2, 2, 3, 3, 4, 9, 55]);
             assert.deepEqual(arr3, [-78, -10, 0, 1, 2, 3, 4, 5, 99, 100]);
-        })
-    })
+        });
+    });
+    describe("Insertion Sort", () => {
+        it("sorts an array in place", () => {
+            const arr1 = [3, 4, 5, 1, 2, -23, -10];
+            const arr2 = [9, 2, 3, 2, 4, 3, -10, 55, -10, 0];
+            const arr3 = [100, 99, 5, 4, 3, 2, 1, 0, -10, -78];
+            insertionSort(arr1);
+            insertionSort(arr2);
+            insertionSort(arr3);
+            assert.deepEqual(arr1, [-23, -10, 1, 2, 3, 4, 5]);
+            assert.deepEqual(arr2, [-10, -10, 0, 2, 2, 3, 3, 4, 9, 55]);
+            assert.deepEqual(arr3, [-78, -10, 0, 1, 2, 3, 4, 5, 99, 100]);
+        });
+    });
 });

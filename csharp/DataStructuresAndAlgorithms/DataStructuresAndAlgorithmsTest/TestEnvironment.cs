@@ -1,7 +1,4 @@
 ﻿using DataStructuresAndAlgorithms;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace DataStructuresAndAlgorithmsTest
@@ -56,6 +53,19 @@ namespace DataStructuresAndAlgorithmsTest
             InsertionSort.Sort(arr1);
             InsertionSort.Sort(arr2);
             InsertionSort.Sort(arr3);
+            Assert.Equal(arr1, new int[] { -23, -10, 1, 2, 3, 4, 5 });
+            Assert.Equal(arr2, new int[] { -10, -10, 0, 2, 2, 3, 3, 4, 9, 55 });
+            Assert.Equal(arr3, new int[] { -78, -10, 0, 1, 2, 3, 4, 5, 99, 100 });
+        }
+        [Fact]
+        public void MergeSortTest()
+        {
+            int[] arr1 = new int[] { 3, 4, 5, 1, 2, -23, -10 };
+            int[] arr2 = new int[] { 9, 2, 3, 2, 4, 3, -10, 55, -10, 0 };
+            int[] arr3 = new int[] { 100, 99, 5, 4, 3, 2, 1, 0, -10, -78 };
+            MergeSort.Sort(arr1);
+            MergeSort.Sort(arr2);
+            MergeSort.Sort(arr3);
             Assert.Equal(arr1, new int[] { -23, -10, 1, 2, 3, 4, 5 });
             Assert.Equal(arr2, new int[] { -10, -10, 0, 2, 2, 3, 3, 4, 9, 55 });
             Assert.Equal(arr3, new int[] { -78, -10, 0, 1, 2, 3, 4, 5, 99, 100 });

@@ -1,10 +1,10 @@
 const assert = require('chai').assert;
-const quickSort = require('../quickSort').quickSort;
-const quickSortOptimized = require('../quickSortOptimized').quickSortOptimized;
-const selectionSort = require('../selectionSort').selectionSort;
-const insertionSort = require('../insertionSort').insertionSort;
-const mergeSort = require('../mergeSort').mergeSort;
-const doBFS = require('../breadthFirstSearch').doBFS;
+const quickSort = require('../../src/sorting/quickSort').quickSort;
+const quickSortOptimized = require('../../src/sorting/quickSortOptimized').quickSortOptimized;
+const selectionSort = require('../../src/sorting/selectionSort').selectionSort;
+const insertionSort = require('../../src/sorting/insertionSort').insertionSort;
+const mergeSort = require('../../src/sorting/mergeSort').mergeSort;
+const doBFS = require('../../src/sorting/breadthFirstSearch').doBFS;
 
 describe("Data Structures And Algorithms", () => {
     describe("Quick Sort", () => {

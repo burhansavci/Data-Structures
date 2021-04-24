@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DataStructuresAndAlgorithms
+namespace Search
 {
     public class BreadthFirstSearch
     {

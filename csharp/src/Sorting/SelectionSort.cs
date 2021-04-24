@@ -1,4 +1,4 @@
-﻿namespace DataStructuresAndAlgorithms
+﻿namespace Sorting
 {
     public class SelectionSort
     {

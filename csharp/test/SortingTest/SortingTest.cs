@@ -1,11 +1,10 @@
-﻿using DataStructuresAndAlgorithms;
-using Xunit;
+﻿using Xunit;
 
-namespace DataStructuresAndAlgorithmsTest
+namespace Sorting
 {
-    public class TestEnvironment
+    public class SortingTest
     {
-        [Fact]
+                [Fact]
         public void QuickSortTest()
         {
             int[] arr1 = new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
@@ -69,29 +68,6 @@ namespace DataStructuresAndAlgorithmsTest
             Assert.Equal(arr1, new int[] { -23, -10, 1, 2, 3, 4, 5 });
             Assert.Equal(arr2, new int[] { -10, -10, 0, 2, 2, 3, 3, 4, 9, 55 });
             Assert.Equal(arr3, new int[] { -78, -10, 0, 1, 2, 3, 4, 5, 99, 100 });
-        }
-        [Fact]
-        public void BreadthFirstSearchTest()
-        {
-            int[][] adjacencyArray = new int[][] {
-                new int[] { 1 },
-                new int[] { 0, 4, 5 },
-                new int[] { 3, 4, 5 },
-                new int[] { 2, 6 },
-                new int[] { 1, 2 },
-                new int[] { 1, 2, 6 },
-                new int[] { 3, 5 },
-                new int[]{}
-            };
-            var bfsInfo = BreadthFirstSearch.DoBFS(adjacencyArray, 3);
-            Assert.Equal(bfsInfo[0], (Distance: 4, Predecessor: 1));
-            Assert.Equal(bfsInfo[1], (Distance: 3, Predecessor: 4));
-            Assert.Equal(bfsInfo[2], (Distance: 1, Predecessor: 3));
-            Assert.Equal(bfsInfo[3], (Distance: 0, Predecessor: null));
-            Assert.Equal(bfsInfo[4], (Distance: 2, Predecessor: 2));
-            Assert.Equal(bfsInfo[5], (Distance: 2, Predecessor: 2));
-            Assert.Equal(bfsInfo[6], (Distance: 1, Predecessor: 3));
-            Assert.Equal(bfsInfo[7], (Distance: null, Predecessor: null));
         }
     }
 }

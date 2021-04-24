@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataStructuresAndAlgorithms
+namespace Sorting
 {
     public class QuickSortOptimized
     {

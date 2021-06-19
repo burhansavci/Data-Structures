@@ -11,7 +11,6 @@ namespace DataStructuresTest.LinkedListTest
         private readonly DoublyLinkedList<int?> list;
         private static readonly int Loops = 10000;
         private static readonly int TestSz = 40;
-        private static readonly int NumNulls = TestSz / 5;
 
         public DoublyLinkedListTest() => list = new DoublyLinkedList<int?>();
 
@@ -203,19 +202,19 @@ namespace DataStructuresTest.LinkedListTest
         [Fact]
         public void TestRandomizedRemoving()
         {
-            var systemLinkedList = new LinkedList<int?>();
+            var systemLinkedList = new LinkedList<int>();
             for (var loops = 0; loops < Loops; loops++)
             {
                 list.Clear();
                 systemLinkedList.Clear();
 
-                var randNums = GenRandList(TestSz);
+                var randNums = TestUtil.GenRandList(TestSz);
                 foreach (var value in randNums)
                 {
                     systemLinkedList.AddLast(value);
                     list.Add(value);
                 }
-                Shuffle(randNums);
+                TestUtil.Shuffle(randNums);
 
                 foreach (var rmVal in randNums)
                 {
@@ -256,14 +255,14 @@ namespace DataStructuresTest.LinkedListTest
         [Fact]
         public void TestRandomizedRemoveAt()
         {
-            var systemLinkedList = new LinkedList<int?>();
+            var systemLinkedList = new LinkedList<int>();
 
             for (var loops = 0; loops < Loops; loops++)
             {
                 list.Clear();
                 systemLinkedList.Clear();
 
-                var randNums = GenRandList(TestSz);
+                var randNums = TestUtil.GenRandList(TestSz);
 
                 foreach (var value in randNums)
                 {
@@ -293,14 +292,14 @@ namespace DataStructuresTest.LinkedListTest
         [Fact]
         public void TestRandomizedIndexOf()
         {
-            var systemLinkedList = new LinkedList<int?>();
+            var systemLinkedList = new LinkedList<int>();
 
             for (var loops = 0; loops < Loops; loops++)
             {
                 systemLinkedList.Clear();
                 list.Clear();
 
-                var randNums = GenUniqueRandList(TestSz);
+                var randNums = TestUtil.GenUniqueRandList(TestSz);
 
                 foreach (var value in randNums)
                 {
@@ -308,7 +307,7 @@ namespace DataStructuresTest.LinkedListTest
                     list.Add(value);
                 }
 
-                Shuffle(randNums);
+                TestUtil.Shuffle(randNums);
 
                 foreach (var elem in randNums)
                 {
@@ -324,42 +323,6 @@ namespace DataStructuresTest.LinkedListTest
                     while (iter1.MoveNext() && iter2.MoveNext())
                         Assert.Equal(iter1.Current, iter2.Current);
                 }
-            }
-        }
-
-        // Generate a list of random numbers
-        private static List<int?> GenRandList(int sz)
-        {
-            var rand = new Random();
-
-            var list = new List<int?>(sz);
-            for (var i = 0; i < sz; i++) list.Add(rand.Next());
-            for (var i = 0; i < NumNulls; i++) list.Add(null);
-            Shuffle(list);
-            return list;
-        }
-
-        // Generate a list of unique random numbers
-        private static List<int?> GenUniqueRandList(int sz)
-        {
-            var list = new List<int?>(sz);
-            for (var i = 0; i < sz; i++) list.Add(i);
-            for (var i = 0; i < NumNulls; i++) list.Add(null);
-            Shuffle(list);
-            return list;
-        }
-
-        private static void Shuffle<T>(IList<T> list)
-        {
-            var rand = new Random();
-            var n = list.Count;
-            while (n > 1)
-            {
-                n--;
-                var k = rand.Next(n + 1);
-                var value = list[k];
-                list[k] = list[n];
-                list[n] = value;
             }
         }
 

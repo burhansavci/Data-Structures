@@ -198,22 +198,22 @@ namespace DataStructures.HashTable
         {
             private readonly SeparateChainingHashTable<TKey, TValue> separateChainingHashTable;
             private int bucketIndex;
-            private LinkedList<Entry<TKey, TValue>>.Enumerator bucketIter;
+            private IEnumerator bucketIter;
 
-            public TKey Current =>  bucketIter.Current!.Key;
-            object IEnumerator.Current => bucketIter.Current!.Key;
+            public TKey Current =>  ((LinkedList<Entry<TKey, TValue>>.Enumerator)bucketIter).Current!.Key;
+            object IEnumerator.Current => ((LinkedList<Entry<TKey, TValue>>.Enumerator)bucketIter).Current!.Key;
 
             public SeparateChainingHashTableEnumerator(SeparateChainingHashTable<TKey, TValue> separateChainingHashTable)
             {
                 this.separateChainingHashTable = separateChainingHashTable;
                 bucketIndex = 0;
-                bucketIter = separateChainingHashTable.table[0].GetEnumerator();
+                bucketIter = separateChainingHashTable.table[0]?.GetEnumerator();
             }
 
             public bool MoveNext()
             {
                 // No iterator or the current iterator is empty
-                if (!bucketIter.MoveNext())
+                if (bucketIter == null || !bucketIter.MoveNext())
                 {
                     // Search next buckets until a valid iterator is found
                     while (++bucketIndex < separateChainingHashTable.capacity)

@@ -7,10 +7,9 @@ namespace DataStructuresTest.HashTableTest
 {
     public class SeparateChainingHashTableTest
     {
-        private static readonly Random Random = new();
         private const int Loops = 500;
-        private static readonly int MaxSize = GetRandomInteger(1, 750);
-        private static readonly int MaxRandNum = GetRandomInteger(1, 350);
+        private static readonly int MaxSize = TestUtil.GetRandomInteger(1, 750);
+        private static readonly int MaxRandNum = TestUtil.GetRandomInteger(1, 350);
 
         private SeparateChainingHashTable<int, int> separateChainingHashTable;
 
@@ -81,7 +80,11 @@ namespace DataStructuresTest.HashTableTest
                 var randNums = TestUtil.GenRandList(MaxSize);
                 foreach (var key in randNums)
                 {
-                    dictionary.Add(key, key);
+                    if (dictionary.ContainsKey(key))
+                        dictionary[key] = key;
+                    else
+                        dictionary.Add(key, key);
+
                     separateChainingHashTable.Add(key, key);
                     Assert.Equal(dictionary[key], separateChainingHashTable.Get(key));
                 }
@@ -117,7 +120,7 @@ namespace DataStructuresTest.HashTableTest
                 var keysSet = new HashSet<int>();
                 for (var i = 0; i < MaxSize; i++)
                 {
-                    var randomInteger = GetRandomInteger(-MaxRandNum, MaxRandNum);
+                    var randomInteger = TestUtil.GetRandomInteger(-MaxRandNum, MaxRandNum);
                     keysSet.Add(randomInteger);
                     hashTable.Add(randomInteger, 5);
                 }
@@ -126,9 +129,7 @@ namespace DataStructuresTest.HashTableTest
 
                 var keys = hashTable.Keys();
                 foreach (var key in keys)
-                {
                     hashTable.Remove(key);
-                }
 
                 Assert.True(hashTable.IsEmpty);
             }
@@ -137,6 +138,7 @@ namespace DataStructuresTest.HashTableTest
         [Fact]
         public void RemoveTest()
         {
+            // Add three elements
             var hashTable = new SeparateChainingHashTable<int, int>(7)
             {
                     {11, 0},
@@ -144,7 +146,6 @@ namespace DataStructuresTest.HashTableTest
                     {13, 0}
             };
 
-            // Add three elements
             Assert.Equal(3, hashTable.Count);
 
             // Add ten more
@@ -199,25 +200,30 @@ namespace DataStructuresTest.HashTableTest
 
                 separateChainingHashTable = new SeparateChainingHashTable<int, int>();
 
-                var probability1 = GetRandomDouble(double.MinValue, double.MaxValue);
-                var probability2 = GetRandomDouble(double.MinValue, double.MaxValue);
+                var probability1 = TestUtil.GetRandomDouble(double.MinValue, double.MaxValue);
+                var probability2 = TestUtil.GetRandomDouble(double.MinValue, double.MaxValue);
 
                 var nums = TestUtil.GenRandList(MaxSize);
                 for (var i = 0; i < MaxSize; i++)
                 {
-                    var randomDouble = GetRandomDouble(double.MinValue, double.MinValue);
+                    var randomDouble = TestUtil.GetRandomDouble(double.MinValue, double.MinValue);
 
                     var key = nums[i];
                     var val = i;
 
                     if (randomDouble < probability1)
                     {
-                        dictionary.Add(key, val);
+                        if (dictionary.ContainsKey(key))
+                            dictionary[key] = val;
+                        else
+                            dictionary.Add(key, val);
+
                         separateChainingHashTable.Add(key, val);
                         Assert.Equal(dictionary[key], separateChainingHashTable.Get(key));
                     }
 
-                    Assert.Equal(dictionary[key], separateChainingHashTable.Get(key));
+                    dictionary.TryGetValue(key, out var value1);
+                    Assert.Equal(value1, separateChainingHashTable.Get(key));
                     Assert.Equal(dictionary.ContainsKey(key), separateChainingHashTable.ContainsKey(key));
                     Assert.Equal(dictionary.Count, separateChainingHashTable.Count);
 
@@ -227,7 +233,8 @@ namespace DataStructuresTest.HashTableTest
                         Assert.Equal(separateChainingHashTable.Remove(key), val);
                     }
 
-                    Assert.Equal(dictionary[key], separateChainingHashTable.Get(key));
+                    dictionary.TryGetValue(key, out var value2);
+                    Assert.Equal(value2, separateChainingHashTable.Get(key));
                     Assert.Equal(dictionary.ContainsKey(key), separateChainingHashTable.ContainsKey(key));
                     Assert.Equal(dictionary.Count, separateChainingHashTable.Count);
                 }
@@ -246,15 +253,15 @@ namespace DataStructuresTest.HashTableTest
                 dictionary.Clear();
                 Assert.Equal(separateChainingHashTable.Count, dictionary.Count);
 
-                var sz = GetRandomInteger(1, MaxSize);
+                var sz = TestUtil.GetRandomInteger(1, MaxSize);
                 hashTable = new SeparateChainingHashTable<int, LinkedList<int>>(sz);
                 dictionary = new Dictionary<int, LinkedList<int>>(sz);
 
-                var probability = GetRandomDouble(double.MinValue, double.MaxValue);
+                var probability = TestUtil.GetRandomDouble(double.MinValue, double.MaxValue);
 
                 for (var i = 0; i < MaxSize; i++)
                 {
-                    var index = GetRandomInteger(0, MaxSize - 1);
+                    var index = TestUtil.GetRandomInteger(0, MaxSize - 1);
                     var l1 = hashTable.Get(index);
                     dictionary.TryGetValue(index, out var l2);
 
@@ -266,9 +273,9 @@ namespace DataStructuresTest.HashTableTest
                         dictionary.Add(index, l2);
                     }
 
-                    var randVal = GetRandomInteger(-MaxSize, MaxSize);
+                    var randVal = TestUtil.GetRandomInteger(-MaxSize, MaxSize);
 
-                    if (GetRandomDouble(double.MinValue, double.MaxValue) < probability)
+                    if (TestUtil.GetRandomDouble(double.MinValue, double.MaxValue) < probability)
                     {
                         l1.Remove(randVal);
                         l2.Remove(randVal);
@@ -282,30 +289,6 @@ namespace DataStructuresTest.HashTableTest
                     Assert.Equal(hashTable.Count, dictionary.Count);
                     Assert.Equal(l1, l2);
                 }
-            }
-        }
-
-        private static int GetRandomInteger(int min, int max) => Random.Next(max - min + 1) + min;
-
-        private static double GetRandomDouble(double minimum, double maximum) => Random.NextDouble() * (maximum - minimum) + minimum;
-        
-        private class HashObject
-        {
-            private readonly int hash;
-            private readonly int data;
-
-            public HashObject(int hash, int data)
-            {
-                this.hash = hash;
-                this.data = data;
-            }
-
-            public override int GetHashCode() => hash;
-
-            public override bool Equals(object? obj)
-            {
-                var ho = (HashObject)obj;
-                return GetHashCode() == ho.GetHashCode() && data == ho.data;
             }
         }
     }

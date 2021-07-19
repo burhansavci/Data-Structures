@@ -42,12 +42,14 @@ namespace DataStructuresTest
 
         public static double GetRandomDouble(double minimum, double maximum) => Rand.NextDouble() * (maximum - minimum) + minimum;
     }
-    
+
     // You can set the hash value of this object to be whatever you want
     // This makes it great for testing special cases.
     public class HashObject
     {
         private readonly int hash, data;
+
+        public HashObject() { }
 
         public HashObject(int hash, int data)
         {

@@ -133,7 +133,7 @@ namespace DataStructuresTest.BinarySearchTreeTest
             for (var i = 0; i < Loops; i++)
             {
                 var tree = new BinarySearchTree<int>();
-                var lst = TestUtil.GenRandList(i);
+                var lst = TestUtil.GenUniqueRandList(i);
                 foreach (var value in lst) tree.Add(value);
                 TestUtil.Shuffle(lst);
 

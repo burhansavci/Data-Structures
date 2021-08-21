@@ -156,7 +156,7 @@ namespace DataStructuresTest.BinarySearchTreeTest
         {
             for (var i = 0; i < Loops; i++)
             {
-                var input = TestUtil.GenRandList(i);
+                var input = TestUtil.GenUniqueRandList(i);
                 Assert.True(ValidateTreeTraversal(TraversalOrder.PreOrder, input));
             }
         }
@@ -166,7 +166,7 @@ namespace DataStructuresTest.BinarySearchTreeTest
         {
             for (var i = 0; i < Loops; i++)
             {
-                var input = TestUtil.GenRandList(i);
+                var input = TestUtil.GenUniqueRandList(i);
                 Assert.True(ValidateTreeTraversal(TraversalOrder.InOrder, input));
             }
         }
@@ -176,7 +176,7 @@ namespace DataStructuresTest.BinarySearchTreeTest
         {
             for (var i = 3; i < Loops; i++)
             {
-                var input = TestUtil.GenRandList(i);
+                var input = TestUtil.GenUniqueRandList(i);
                 Assert.True(ValidateTreeTraversal(TraversalOrder.PostOrder, input));
             }
         }
@@ -186,7 +186,7 @@ namespace DataStructuresTest.BinarySearchTreeTest
         {
             for (var i = 0; i < Loops; i++)
             {
-                var input = TestUtil.GenRandList(i);
+                var input = TestUtil.GenUniqueRandList(i);
                 Assert.True(ValidateTreeTraversal(TraversalOrder.LevelOrder, input));
             }
         }
